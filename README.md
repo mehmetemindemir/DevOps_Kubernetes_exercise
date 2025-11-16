@@ -12,7 +12,7 @@ kind: Deployment
 metadata:
   name: hellodocker
 spec:
-  replicas: 3
+  replicas: 1 #OR your desired number of replicas
   selector:
     matchLabels:
       app: hellodocker
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: hellodocker
-          image: pritamworld/hellodocker:latest
+          image: pritamworld/hellodocker:latest #Replace with your image <dockerusername>/hellodocker:latest
           ports:
             - containerPort: 80
           readinessProbe:
@@ -32,12 +32,21 @@ spec:
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
+            timeoutSeconds: 10
           livenessProbe:
             httpGet:
               path: /
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 10
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2" 
 ```
 Save as `hellodocker-service.yaml`:
 
@@ -47,14 +56,14 @@ kind: Service
 metadata:
   name: hellodocker-nodeport
 spec:
-  type: NodePort
+  type: NodePort #OR LoadBalancer or ClusterIP depending on your needs
   selector:
     app: hellodocker
   ports:
     - name: http
       port: 80
       targetPort: 80
-      nodePort: 30080   # optional; pick any free port in 30000–32767
+      nodePort: 30080 # optional; pick any free port in 30000–32767
 ```
 
 Apply & verify:
