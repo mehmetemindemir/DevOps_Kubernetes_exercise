@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default        # or your custom Argo CD project
   source:
-    repoURL: 'https://github.com/pritamworld/DevOps_Kubernetes_exercise10.git'
+    repoURL: 'https://github.com/mehmetemindemir/DevOps_Kubernetes_exercise.git'
     targetRevision: main          # branch, tag, or commit
     path: k8s                      # folder in the repo with your manifests
   destination:
