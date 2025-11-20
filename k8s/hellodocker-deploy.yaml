@@ -20,13 +20,13 @@ spec:
     spec:
       containers:
         - name: hellodocker
-          image: pritamworld/hellodocker:561a63aba5667a5145c71c9a29b4c7f4870cc681 #Replace with your image <dockerusername>/hellodocker:latest
+          image: demirmehmetemin/hellodocker:latest #Replace with your image <dockerusername>/hellodocker:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:
             - name: NAME
-              value: "Pritesh from minikube and Kubernetes"
+              value: "Mehmet from minikube , Kubernetes and argoCD examples"
           readinessProbe:
             httpGet:
               path: /
